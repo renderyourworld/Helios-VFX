@@ -7,9 +7,14 @@ Optimized Kasm Desktops for general use
 - [Features](#features)
 - [Kasm Setup](#kasm-setup)
 - [Distros](#distros)
+  - Debian
+    - [Debian 12 (Bookworm)](#debian-12-bookworm)
+    - [Debian Rolling (Trixie/Sid)](#debian-rolling-trixie-sid)
+    - [Kali Linux (Rolling Release)](#kali-linux-rolling-release)
+  - Ubuntu
     - [Ubuntu 24.04 (Noble)](#ubuntu-2404-noble)
     - [Ubuntu 22.04 (Jammy)](#ubuntu-2204-jammy)
-    - [Kali Linux (Rolling Release)](#kali-linux-rolling-release)
+  - RHEL
     - [Rocky Linux (9)](#rocky-linux-9)
     - [Alma Linux (9)](#alma-linux-9)
 - [Versioning](#versioning)
@@ -63,28 +68,43 @@ We try our best to keep the latest version of Kasm installed so we get all the l
 
 ## Distros
 
-### [Ubuntu 24.04 (Noble)](https://hub.docker.com/_/ubuntu/tags?name=noble)
+### Debian
 
-- Size: 1.48 GB
+#### [Debian 12 (Bookworm)](https://hub.docker.com/_/debian/tags?name=bookworm)
+
+- Size: 1.68 GB
 - X Server: 21.1.4 (Custom)
 
+#### [Debian Rolling (Trixie/Sid)](https://hub.docker.com/_/debian/tags?name=sid)
 
-### [Ubuntu 22.04 (Jammy)](https://hub.docker.com/_/ubuntu/tags?name=jammy)
-
-- Size: 1.48 GB
+- Size: 1.79 GB
 - X Server: 21.1.4 (Custom)
 
-
-### [Kali Linux (Rolling Release)](https://hub.docker.com/r/kalilinux/kali-rolling)
+#### [Kali Linux (Rolling Release)](https://hub.docker.com/r/kalilinux/kali-rolling)
 
 > [!TIP]  
 > We don't install any default Kali tools in this image. Please follow the instructions in the [Kali Linux Docker Image documentation](https://www.kali.org/docs/containers/official-kalilinux-docker-images/) to install them.
 
-- Size: 1.74 GB (This does not include the Kali tools which make the image much larger)
+- Size: 1.73 GB (This does not include the Kali tools which make the image much larger)
+- X Server: 21.1.4 (Custom)
+
+### Ubuntu
+
+#### [Ubuntu 24.04 (Noble)](https://hub.docker.com/_/ubuntu/tags?name=noble)
+
+- Size: 1.48 GB
 - X Server: 21.1.4 (Custom)
 
 
-### [Rocky Linux (9)](https://hub.docker.com/_/rockylinux/tags?name=9)
+#### [Ubuntu 22.04 (Jammy)](https://hub.docker.com/_/ubuntu/tags?name=jammy)
+
+- Size: 1.48 GB
+- X Server: 21.1.4 (Custom)
+
+
+### RHEL
+
+#### [Rocky Linux (9)](https://hub.docker.com/_/rockylinux/tags?name=9)
 
 > [!WARNING]  
 > Currently WebRTC is not supported on Rocky Linux due to upstream limitations with Kasm. This may change in the future.
@@ -93,7 +113,7 @@ We try our best to keep the latest version of Kasm installed so we get all the l
 - X Server: 1.20.14 (Custom)
 
 
-### [Alma Linux (9)](https://hub.docker.com/_/almalinux/tags?name=9)
+#### [Alma Linux (9)](https://hub.docker.com/_/almalinux/tags?name=9)
 
 > [!WARNING]  
 > Currently WebRTC is not supported on Alma Linux due to upstream limitations with Kasm. This may change in the future.
@@ -107,21 +127,32 @@ Helios ships its own version that is independent of the underlying distro versio
 `v0.0.0-noble`, where `noble` is the codename of the underlying distro. This allows us to track changes and updates to 
 Helios independently of the underlying distro. Some further examples of the versioning scheme are:
 
+- `v0.0.0-bookworm` for Debian 12 (Bookworm)
 - `v0.0.0-noble` for Ubuntu 24.04
 - `v0.0.0-jammy` for Ubuntu 22.04
 - `v0.0.0-kali` for Kali Linux
 - `v0.0.0-rocky-9` for Rocky Linux
 - `v0.0.0-alma-9` for Alma Linux
 
-Helios also ships `unstable` builds which are built directly off of the `testing` branch. These builds are meant for
+Helios also ships `unstable` builds which are built directly off of the `main` branch. These builds are meant for
 testing and development purposes only. They are not meant for production use and may contain bugs or incomplete features.
 
+- `unstable-bookworm` for the latest unstable build of Debian 12
 - `unstable-noble` for the latest unstable build of Ubuntu 24.04
 - `unstable-jammy` for the latest unstable build of Ubuntu 22.04
 - `unstable-kali` for the latest unstable build of Kali Linux
 - `unstable-rocky-9` for the latest unstable build of Rocky Linux
 - `unstable-alma-9` for the latest unstable build of Alma Linux
 
+Helios also ships a `testing` tag which is built from the `testing` branch. This branch is meant for testing new 
+features and changes before they are merged into the `main` branch. The `testing` tag is meant to be used for testing 
+purposes only and may contain bugs or incomplete features.
+
+- `testing-noble` for the latest testing build of Ubuntu 24.04
+- `testing-jammy` for the latest testing build of Ubuntu 22.04
+- `testing-kali` for the latest testing build of Kali Linux
+- `testing-rocky-9` for the latest testing build of Rocky Linux
+- `testing-alma-9` for the latest testing build of Alma Linux
 
 
 ## Usage
@@ -130,12 +161,12 @@ testing and development purposes only. They are not meant for production use and
 
 Environment variables are used to configure the Helios container. The following environment variables are available:
 
-| Name     | Value                                               | Required |
-|----------|-----------------------------------------------------|----------|
-| USER     | Name of the user                                    | X        |
-| PASSWORD | Password that will be set to access the workstation | X        |
-| UID      | POSIX compliant uid for the user                    | X        |
-| GID      | POSIX compliant gid for the user                    |          |
+| Name     | Value                            | Required |
+|----------|----------------------------------|----------|
+| USER     | Name of the user                 | X        |
+| UID      | POSIX compliant uid for the user | X        |
+| GID      | POSIX compliant gid for the user |          |
+| PASSWORD | Password set for the user        |          |
 
 > [!TIP]  
 > The `GID` will match the `UID` if not specified.
@@ -145,6 +176,16 @@ Environment variables are used to configure the Helios container. The following 
 > Because of s6, the container always starts and runs as root. It then uses s6 to run the desktop using the specified 
 > user using those environment variables. This is done to ensure that the desktop has the correct permissions and 
 > ownership on things like the home directory and other files. This helps with things like Network Shares as well.
+
+> [!CAUTION]
+> Helios DOES NOT provide any authentication for connecting to the workstation. This means that anyone who can
+> connect to the http endpoint can access the desktop as that user. For proper security, we recommend using a 
+> reverse proxy with authentication in front of Helios. This can be done using Nginx, Traefik, or any other 
+> reverse proxy that supports authentication.
+> 
+> Security is a very important part of any deployment and it isn't a one size fits all solution. Instead of shipping
+> Helios with a specific authentication method, we leave it up to the user to implement their own security measures
+> that best fit their deployment. This allows for more flexibility and customization in how Helios is used.
 
 ### Ports
 
