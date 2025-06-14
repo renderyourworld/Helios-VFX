@@ -116,6 +116,8 @@ apt install --no-install-recommends -y \
 	tumbler-plugins-extra \
 	xssstate
 
+rm -rfv /usr/share/backgrounds/*
+
 # remove duplicate sources
 rm -f /etc/apt/sources.list
 

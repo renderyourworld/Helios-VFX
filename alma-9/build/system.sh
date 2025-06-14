@@ -69,6 +69,11 @@ dnf install -y --setopt=install_weak_deps=False --best \
 	wget \
 	https://kojipkgs.fedoraproject.org//vol/fedora_koji_archive06/packages/xssstate/1.1/18.fc35/x86_64/xssstate-1.1-18.fc35.x86_64.rpm
 
+# handle background
+mv -v /usr/share/backgrounds/Alma-waves-sunset-2560x1600.jpg /tmp/background.png
+rm -rfv /usr/share/backgrounds/*
+mv -v /tmp/background.png /usr/share/backgrounds/
+
 # install node
 dnf module install nodejs:20/common -y
 

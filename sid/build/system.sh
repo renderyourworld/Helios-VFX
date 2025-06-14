@@ -111,6 +111,8 @@ apt install --no-install-recommends -y \
 	tumbler-plugins-extra \
 	xssstate
 
+rm -rfv /usr/share/backgrounds/*
+
 # backwards compat for password generation
 pip install crypt-r --break-system-packages
 
