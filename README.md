@@ -77,7 +77,7 @@ We try our best to keep the latest version of Kasm installed so we get all the l
 
 #### [Debian Rolling (Trixie/Sid)](https://hub.docker.com/_/debian/tags?name=sid)
 
-- Size: 1.79 GB
+- Size: 1.78 GB
 - X Server: 21.1.4 (Custom)
 
 #### [Kali Linux (Rolling Release)](https://hub.docker.com/r/kalilinux/kali-rolling)
@@ -85,20 +85,20 @@ We try our best to keep the latest version of Kasm installed so we get all the l
 > [!TIP]  
 > We don't install any default Kali tools in this image. Please follow the instructions in the [Kali Linux Docker Image documentation](https://www.kali.org/docs/containers/official-kalilinux-docker-images/) to install them.
 
-- Size: 1.73 GB (This does not include the Kali tools which make the image much larger)
+- Size: 1.74 GB (This does not include the Kali tools which make the image much larger)
 - X Server: 21.1.4 (Custom)
 
 ### Ubuntu
 
 #### [Ubuntu 24.04 (Noble)](https://hub.docker.com/_/ubuntu/tags?name=noble)
 
-- Size: 1.48 GB
+- Size: 1.47 GB
 - X Server: 21.1.4 (Custom)
 
 
 #### [Ubuntu 22.04 (Jammy)](https://hub.docker.com/_/ubuntu/tags?name=jammy)
 
-- Size: 1.48 GB
+- Size: 1.39 GB
 - X Server: 21.1.4 (Custom)
 
 
@@ -109,7 +109,7 @@ We try our best to keep the latest version of Kasm installed so we get all the l
 > [!WARNING]  
 > Currently WebRTC is not supported on Rocky Linux due to upstream limitations with Kasm. This may change in the future.
 
-- Size: 1.82 GB
+- Size: 1.86 GB
 - X Server: 1.20.14 (Custom)
 
 
@@ -161,12 +161,13 @@ purposes only and may contain bugs or incomplete features.
 
 Environment variables are used to configure the Helios container. The following environment variables are available:
 
-| Name     | Value                            | Required |
-|----------|----------------------------------|----------|
-| USER     | Name of the user                 | X        |
-| UID      | POSIX compliant uid for the user | X        |
-| GID      | POSIX compliant gid for the user |          |
-| PASSWORD | Password set for the user        |          |
+| Name      | Value                              | Required |
+|-----------|------------------------------------|----------|
+| USER      | Name of the user                   | X        |
+| UID       | POSIX compliant uid for the user   | X        |
+| GID       | POSIX compliant gid for the user   |          |
+| PASSWORD  | Password set for the user          |          |
+| IDLE_TIME | Trigger the idle hook after x time |          |
 
 > [!TIP]  
 > The `GID` will match the `UID` if not specified.
@@ -210,8 +211,6 @@ docker run -d \
   -p 3000:3000 \
   -e USER=bob \
   -e UID=1000 \
-  -e GID=1000 \
-  -e PASSWORD=password \
   helios:v0.0.0-noble
 ``` 
 
@@ -228,8 +227,6 @@ services:
       environment:
          - USER=helios
          - UID=1000
-         - GID=1000
-         - PASSWORD=password
       ports:
          - "3000:3000"
 ```
@@ -264,10 +261,6 @@ spec:
                    value: "helios"
                  - name: UID
                    value: "1000"
-                 - name: GID
-                   value: "1000"
-                 - name: PASSWORD
-                   value: "password"
 ```
 
 ## Customizing Helios
@@ -311,11 +304,14 @@ COPY ./my-custom-init.sh /etc/helios/init.d/my-custom-init.sh
 
 # custom service
 COPY ./my-custom-service.sh /etc/helios/services.d/custom.sh
+
+# custom idle script
+COPY ./my-custom-service.sh /etc/helios/idle.d/custom.sh
 ```
 
 #### Mounting
 
-Finally, you can dynamically mount the scripts via docker or kubernetes mounts by just mapping the sciripts to the
+Finally, you can dynamically mount the scripts via docker or kubernetes mounts by just mapping the scripts to the
 `/etc/helios/init.d` or `/etc/helios/services.d` directories. This allows you to have custom scripts and services without
 the need to rebuild the image. This is useful for testing and development purposes.
 
@@ -324,10 +320,11 @@ docker run -d \
   --name my-helios-container \
   -v /path/to/my-custom-init.sh:/etc/helios/init.d/my-custom-init.sh \
   -v /path/to/my-custom-service.sh:/etc/helios/services.d/custom.sh \
+  -v /path/to/my-custom-idle.sh:/etc/helios/idle.d/custom.sh \
   helios:v0.0.0-noble
 ```
 
-You can achive the same a number of ways in Kubernetes. For example, you can use a ConfigMap to mount the scripts into the container.
+You can achieve the same a number of ways in Kubernetes. For example, you can use a ConfigMap to mount the scripts into the container.
 
 ```yaml
 apiVersion: v1
@@ -335,6 +332,10 @@ kind: ConfigMap
 metadata:
   name: my-helios-config
 data:
+    my-custom-idle.sh: |
+        #!/bin/sh
+        echo "Helios has hit the idle timeout!"
+      
     my-custom-init.sh: |
         #!/bin/sh
         echo "Hello from my custom init script!"
@@ -377,11 +378,11 @@ spec:
               - name: custom-services
                 mountPath: /etc/helios/services.d/custom.sh
                 subPath: my-custom-service.sh
+              - name: custom-idle
+                mountPath: /etc/helios/idle.d/custom.sh
+                subPath: my-custom-idle.sh
            volumes:
            - name: custom-scripts
-             configMap:
-               name: my-helios-config
-           - name: custom-services
              configMap:
                name: my-helios-config
 ```
