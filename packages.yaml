@@ -45,6 +45,11 @@ packages:
   # ========================================
   # Graphics and Multimedia Packages
   # ========================================
+  - rhel: libglvnd-opengl
+  - rhel: libxkbcommon-x11
+  - rhel: xcb-util-cursor-devel
+  - rhel: xcb-util-keysyms
+  - rhel: xcb-util-wm
   - debian: mesa-va-drivers  # Provides video acceleration drivers for Intel, AMD, and other graphics cards in Linux.
     rhel: mesa-va-drivers   
     alpine: mesa-va-gallium
