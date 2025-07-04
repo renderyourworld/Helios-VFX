@@ -31,9 +31,7 @@ Some key points about Helios:
 
 - 🚀 [Features](#✨-features)  
 - ⚙️ [Kasm Setup](#⚙️-kasm-setup)
-- 🐧 [Distros Overview](#🐧-distros-overview)  
-  - Alpine (Unsupported) 
-    - [Alpine 3](#alpine-3)  
+- 🐧 [Distros Overview](#🐧-distros-overview)
   - Debian  
     - [Debian 12 (Bookworm)](#debian-12-bookworm)  
     - [Debian Rolling (Trixie/Sid)](#debian-rolling-trixie-sid)  

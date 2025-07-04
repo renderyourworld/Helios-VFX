@@ -21,9 +21,6 @@ jobs:
     strategy:
       matrix:
         distro:
-#          - image: alpine:3
-#            source: alpine-3
-#            rhel: false
           - image: debian:bookworm
             source: bookworm
             rhel: false
