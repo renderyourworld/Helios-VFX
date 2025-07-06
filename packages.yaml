@@ -42,6 +42,7 @@ packages:
   - common: pulseaudio-utils  # Utility tools for interacting with the PulseAudio sound server.
   - common: file  # Command-line tool to determine the type of files based on content, not file extension.
   - common: tumbler  # Thumbnailer service for creating previews of files in the file manager.
+  - common: xarchiver  # Archive manager for XFCE, supporting various archive formats like .zip, .tar, etc.
 
   # ========================================
   # Nuke Dependencies
