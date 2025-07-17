@@ -44,6 +44,24 @@ packages:
   - common: pulseaudio-utils  # Utility tools for interacting with the PulseAudio sound server.
   - common: file  # Command-line tool to determine the type of files based on content, not file extension.
   - common: tumbler  # Thumbnailer service for creating previews of files in the file manager.
+  - common: xarchiver  # Archive manager for XFCE, supporting various archive formats like .zip, .tar, etc.
+
+  # ========================================
+  # Nuke Dependencies
+  # ========================================
+  - rhel: libglvnd-opengl  # OpenGL Vendor Neutral Dispatch library, providing OpenGL support across different vendors.
+    debian: libglvnd0
+  - rhel: libxkbcommon-x11
+    debian: libxkbcommon-x11-0  # X11 support for the xkbcommon library, used for keyboard input handling.
+  - rhel: xcb-util-cursor-devel
+    debian: libxcb-cursor-dev
+  - rhel: xcb-util-keysyms
+    debian: libxcb-keysyms1
+  - debian: libxcomposite-dev
+  - debian: libxcb-xinerama0
+  - debian: libxcb-icccm4
+  - rhel: xcb-util-wm
+    debian: libxcb-util0-dev  # X11 library for managing window manager interactions in the X protocol.
 
   # ========================================
   # Graphics and Multimedia Packages
