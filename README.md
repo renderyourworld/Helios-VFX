@@ -103,7 +103,7 @@ Explore the supported Linux distributions with their versions, image sizes, and 
 > [!WARNING]  
 > WebRTC is currently **not supported** on Rocky Linux due to upstream Kasm limitations. This may change in the future.
 
-- **Size:** 1.87 GB  
+- **Size:** 1.88 GB  
 - **X Server:** 1.20.14 (Custom)
 
 #### [Alma Linux 9](https://hub.docker.com/_/almalinux/tags?name=9)
@@ -111,7 +111,7 @@ Explore the supported Linux distributions with their versions, image sizes, and 
 > [!WARNING]  
 > WebRTC is currently **not supported** on Alma Linux due to upstream Kasm limitations. This may change in the future.
 
-- **Size:** 1.61 GB  
+- **Size:** 1.62 GB  
 - **X Server:** 1.20.14 (Custom)
 
 ## 🏷️ Versioning
