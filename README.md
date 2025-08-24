@@ -31,13 +31,9 @@ Some key points about Helios:
 
 - 🚀 [Features](#✨-features)  
 - ⚙️ [Kasm Setup](#⚙️-kasm-setup)
-- 🐧 [Distros Overview](#🐧-distros-overview)  
-  - Alpine  
-    - [Alpine 3](#alpine-3)  
+- 🐧 [Distros Overview](#🐧-distros-overview)
   - Debian  
     - [Debian 12 (Bookworm)](#debian-12-bookworm)  
-    - [Debian Rolling (Trixie/Sid)](#debian-rolling-trixie-sid)  
-    - [Kali Linux (Rolling Release)](#kali-linux-rolling-release)  
   - Ubuntu  
     - [Ubuntu 24.04 (Noble)](#ubuntu-2404-noble)  
     - [Ubuntu 22.04 (Jammy)](#ubuntu-2204-jammy)  
@@ -77,33 +73,11 @@ Explore the supported Linux distributions with their versions, image sizes, and 
 
 ---
 
-### Alpine
-
-#### [Alpine 3](https://hub.docker.com/_/alpine/tags?name=3)
-
-- **Size:** 1.17 GB  
-- **X Server:** 1.20.14 (Custom)
-
----
-
 ### Debian Family
 
 #### [Debian 12 (Bookworm)](https://hub.docker.com/_/debian/tags?name=bookworm)
 
 - **Size:** 1.68 GB  
-- **X Server:** 21.1.4 (Custom)
-
-#### [Debian Rolling (Trixie/Sid)](https://hub.docker.com/_/debian/tags?name=sid)
-
-- **Size:** 1.76 GB  
-- **X Server:** 21.1.4 (Custom)
-
-#### [Kali Linux (Rolling Release)](https://hub.docker.com/r/kalilinux/kali-rolling)
-
-> [!TIP]  
-> No default Kali tools are installed in this image. Please refer to the [Kali Linux Docker Image documentation](https://www.kali.org/docs/containers/official-kalilinux-docker-images/) for installing them.
-
-- **Size:** 1.73 GB (Excludes Kali tools which increase image size)  
 - **X Server:** 21.1.4 (Custom)
 
 ---
@@ -149,10 +123,8 @@ Helios uses its own versioning scheme independent of the underlying distro versi
 | Helios Version    | Distro               |
 |-------------------|----------------------|
 | `v0.0.0-bookworm` | Debian 12 (Bookworm) |
-| `v0.0.0-alpine-3` | Alpine (3)           |
 | `v0.0.0-noble`    | Ubuntu 24.04         |
 | `v0.0.0-jammy`    | Ubuntu 22.04         |
-| `v0.0.0-kali`     | Kali Linux           |
 | `v0.0.0-rocky-9`  | Rocky Linux          |
 | `v0.0.0-alma-9`   | Alma Linux           |
 
@@ -164,10 +136,8 @@ Helios uses its own versioning scheme independent of the underlying distro versi
 
   Examples:
   - `unstable-bookworm` (Debian 12)
-  - `unstable-alpine-3` (Alpine 3)
   - `unstable-noble` (Ubuntu 24.04)
   - `unstable-jammy` (Ubuntu 22.04)
-  - `unstable-kali` (Kali Linux)
   - `unstable-rocky-9` (Rocky Linux)
   - `unstable-alma-9` (Alma Linux)
 
@@ -176,9 +146,7 @@ Helios uses its own versioning scheme independent of the underlying distro versi
   Examples:
   - `testing-noble` (Ubuntu 24.04)
   - `testing-bookworm` (Debian 12)
-  - `testing-alpine-3` (Alpine 3)
   - `testing-jammy` (Ubuntu 22.04)
-  - `testing-kali` (Kali Linux)
   - `testing-rocky-9` (Rocky Linux)
   - `testing-alma-9` (Alma Linux)
 
