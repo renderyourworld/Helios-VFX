@@ -12,33 +12,33 @@
 
 ---
 
-[Official Documentation](https://juno-fx.github.io/Helios/) 
+[Official Documentation](https://juno-fx.github.io/Helios/)
 
 Helios provides base images for multiple key Linux distributions, optimized to be as small as possible to:
 
-- Reduce pull times  
-- Minimize the attack surface  
-- Lower data transfer costs  
+- Reduce pull times
+- Minimize the attack surface
+- Lower data transfer costs
 
 These images are lightweight, efficient, and ready to use across environments like Docker, Kubernetes, and more.
 
 Some key points about Helios:
 
-- **Base Images**: Designed as base images for Kasm-compatible deployments.  
+- **Base Images**: Designed as base images for Selkies-compatible deployments.
 - **Extremely Minimal Desktops**: Images are intentionally minimal; avoid adding software directly. Instead, extend via the `FROM` instruction in your Dockerfile.
 
 ## 📚 Table of Contents
 
-- 🚀 [Features](#✨-features)  
-- ⚙️ [Kasm Setup](#⚙️-kasm-setup)
+- 🚀 [Features](#✨-features)
+- ⚙️ [Selkies Setup](#⚙️-selkies-setup)
 - 🐧 [Distros Overview](#🐧-distros-overview)
-  - Debian  
-    - [Debian 12 (Bookworm)](#debian-12-bookworm)  
-  - Ubuntu  
-    - [Ubuntu 24.04 (Noble)](#ubuntu-2404-noble)  
-    - [Ubuntu 22.04 (Jammy)](#ubuntu-2204-jammy)  
-  - RHEL  
-    - [Rocky Linux 9](#rocky-linux-9)  
+  - Debian
+    - [Debian 12 (Bookworm)](#debian-12-bookworm)
+  - Ubuntu
+    - [Ubuntu 24.04 (Noble)](#ubuntu-2404-noble)
+    - [Ubuntu 22.04 (Jammy)](#ubuntu-2204-jammy)
+  - RHEL
+    - [Rocky Linux 9](#rocky-linux-9)
     - [Alma Linux 9](#alma-linux-9)
 - 🏷️ [Versioning](#%EF%B8%8F-versioning)
 - ⚡ [Usage](https://juno-fx.github.io/Helios/deploy-usage/)
@@ -48,22 +48,18 @@ Some key points about Helios:
 
 ## ✨ Features
 
-- **Lightweight**: Minimal resource usage for efficient performance.  
-- **WebRTC Support**: Seamless audio and video streaming (available on non-RHEL distros).  
-- **Multi-Monitor Support**: Enhanced productivity with multiple displays.  
-- **Audio Support**: High-quality audio streaming for improved user experience.  
+- **Lightweight**: Minimal resource usage for efficient performance.
+- **WebRTC Support** (Coming Soon): High performance, low-latency video streaming.
+- **Audio Support** (Coming Soon): High-quality audio streaming for improved user experience.
 - **VirtualGL Support**: Hardware-accelerated 3D graphics using `vglrun`.
 
 ---
 
-## ⚙️ Kasm Setup
+## ⚙️ Selkies Setup
 
-We maintain the latest versions of Kasm components to ensure access to the newest features and bug fixes:
+We maintain the latest versions of Selkies components to ensure access to the newest features and bug fixes:
 
-- **Kasm VNC**: [v1.3.4](https://github.com/kasmtech/KasmVNC/tree/release/1.3.4)  
-- **Kasm Web Client**: [Commit bed156c](https://github.com/kasmtech/noVNC/tree/bed156c565f7646434563d2deddd3a6c945b7727)  
-- **Kasm Binaries**: v1.15.0  
-- **Linuxserver.io KClient**: [Latest master branch](https://github.com/linuxserver/kclient/commits/master/)
+- **Selkies**: [d4b2c32b65c58329e14d580784d4cbb98cb44564](https://github.com/selkies-project/selkies/tree/d4b2c32b65c58329e14d580784d4cbb98cb44564)
 
 ---
 
@@ -71,14 +67,12 @@ We maintain the latest versions of Kasm components to ensure access to the newes
 
 Explore the supported Linux distributions with their versions, image sizes, and X Server details.
 
----
 
 ### Debian Family
 
 #### [Debian 12 (Bookworm)](https://hub.docker.com/_/debian/tags?name=bookworm)
 
-- **Size:** 1.68 GB  
-- **X Server:** 21.1.4 (Custom)
+- **Size:** 1.55 GB
 
 ---
 
@@ -86,13 +80,11 @@ Explore the supported Linux distributions with their versions, image sizes, and 
 
 #### [Ubuntu 24.04 (Noble)](https://hub.docker.com/_/ubuntu/tags?name=noble)
 
-- **Size:** 1.45 GB  
-- **X Server:** 21.1.4 (Custom)
+- **Size:** 1.4 GB
 
 #### [Ubuntu 22.04 (Jammy)](https://hub.docker.com/_/ubuntu/tags?name=jammy)
 
-- **Size:** 1.4 GB  
-- **X Server:** 21.1.4 (Custom)
+- **Size:** 1.29 GB
 
 ---
 
@@ -100,19 +92,11 @@ Explore the supported Linux distributions with their versions, image sizes, and 
 
 #### [Rocky Linux 9](https://hub.docker.com/_/rockylinux/tags?name=9)
 
-> [!WARNING]  
-> WebRTC is currently **not supported** on Rocky Linux due to upstream Kasm limitations. This may change in the future.
-
-- **Size:** 1.88 GB  
-- **X Server:** 1.20.14 (Custom)
+- **Size:** 1.68 GB
 
 #### [Alma Linux 9](https://hub.docker.com/_/almalinux/tags?name=9)
 
-> [!WARNING]  
-> WebRTC is currently **not supported** on Alma Linux due to upstream Kasm limitations. This may change in the future.
-
-- **Size:** 1.62 GB  
-- **X Server:** 1.20.14 (Custom)
+- **Size:** 1.46 GB
 
 ## 🏷️ Versioning
 

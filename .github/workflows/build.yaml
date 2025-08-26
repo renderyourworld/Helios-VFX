@@ -26,19 +26,14 @@ jobs:
         distro:
           - image: debian:bookworm
             source: bookworm
-            rhel: false
           - image: ubuntu:jammy
             source: jammy
-            rhel: false
           - image: ubuntu:noble
             source: noble
-            rhel: false
           - image: rockylinux:9
             source: rocky-9
-            rhel: true
           - image: almalinux:9
             source: alma-9
-            rhel: true
     steps:
       - name: Clean Ref
         id: calculate_ref
@@ -68,4 +63,3 @@ jobs:
           build-args: |
             IMAGE=${{ matrix.distro.image }}
             SRC=${{ matrix.distro.source }}
-            RHEL=${{ matrix.distro.rhel }}
