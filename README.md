@@ -24,20 +24,16 @@ These images are lightweight, efficient, and ready to use across environments li
 
 Some key points about Helios:
 
-- **Base Images**: Designed as base images for Selkies-compatible deployments.  
+- **Base Images**: Designed as base images for Kasm-compatible deployments.  
 - **Extremely Minimal Desktops**: Images are intentionally minimal; avoid adding software directly. Instead, extend via the `FROM` instruction in your Dockerfile.
 
 ## 📚 Table of Contents
 
 - 🚀 [Features](#✨-features)  
-- ⚙️ [Selkies Setup](#⚙️-selkies-setup)
-- 🐧 [Distros Overview](#🐧-distros-overview)  
-  - Alpine  
-    - [Alpine 3](#alpine-3)  
+- ⚙️ [Kasm Setup](#⚙️-kasm-setup)
+- 🐧 [Distros Overview](#🐧-distros-overview)
   - Debian  
     - [Debian 12 (Bookworm)](#debian-12-bookworm)  
-    - [Debian Rolling (Trixie/Sid)](#debian-rolling-trixie-sid)  
-    - [Kali Linux (Rolling Release)](#kali-linux-rolling-release)  
   - Ubuntu  
     - [Ubuntu 24.04 (Noble)](#ubuntu-2404-noble)  
     - [Ubuntu 22.04 (Jammy)](#ubuntu-2204-jammy)  
@@ -53,17 +49,21 @@ Some key points about Helios:
 ## ✨ Features
 
 - **Lightweight**: Minimal resource usage for efficient performance.  
-- **WebRTC Support** (Coming Soon): High performance, low-latency video streaming.
-- **Audio Support** (Coming Soon): High-quality audio streaming for improved user experience.  
+- **WebRTC Support**: Seamless audio and video streaming (available on non-RHEL distros).  
+- **Multi-Monitor Support**: Enhanced productivity with multiple displays.  
+- **Audio Support**: High-quality audio streaming for improved user experience.  
 - **VirtualGL Support**: Hardware-accelerated 3D graphics using `vglrun`.
 
 ---
 
-## ⚙️ Selkies Setup
+## ⚙️ Kasm Setup
 
-We maintain the latest versions of Selkies components to ensure access to the newest features and bug fixes:
+We maintain the latest versions of Kasm components to ensure access to the newest features and bug fixes:
 
-- **Selkies**: [d4b2c32b65c58329e14d580784d4cbb98cb44564](https://github.com/selkies-project/selkies/tree/d4b2c32b65c58329e14d580784d4cbb98cb44564)
+- **Kasm VNC**: [v1.3.4](https://github.com/kasmtech/KasmVNC/tree/release/1.3.4)  
+- **Kasm Web Client**: [Commit bed156c](https://github.com/kasmtech/noVNC/tree/bed156c565f7646434563d2deddd3a6c945b7727)  
+- **Kasm Binaries**: v1.15.0  
+- **Linuxserver.io KClient**: [Latest master branch](https://github.com/linuxserver/kclient/commits/master/)
 
 ---
 
@@ -71,23 +71,14 @@ We maintain the latest versions of Selkies components to ensure access to the ne
 
 Explore the supported Linux distributions with their versions, image sizes, and X Server details.
 
+---
 
 ### Debian Family
 
 #### [Debian 12 (Bookworm)](https://hub.docker.com/_/debian/tags?name=bookworm)
 
-- **Size:** 1.55 GB  
-
-#### [Debian Rolling (Sid)](https://hub.docker.com/_/debian/tags?name=sid)
-
-- **Size:** 1.65 GB  
-
-#### [Kali Linux (Rolling Release)](https://hub.docker.com/r/kalilinux/kali-rolling)
-
-> [!TIP]  
-> No default Kali tools are installed in this image. Please refer to the [Kali Linux Docker Image documentation](https://www.kali.org/docs/containers/official-kalilinux-docker-images/) for installing them.
-
-- **Size:** 1.64 GB (Excludes Kali tools which increase image size) 
+- **Size:** 1.68 GB  
+- **X Server:** 21.1.4 (Custom)
 
 ---
 
@@ -95,11 +86,13 @@ Explore the supported Linux distributions with their versions, image sizes, and 
 
 #### [Ubuntu 24.04 (Noble)](https://hub.docker.com/_/ubuntu/tags?name=noble)
 
-- **Size:** 1.4 GB 
+- **Size:** 1.45 GB  
+- **X Server:** 21.1.4 (Custom)
 
 #### [Ubuntu 22.04 (Jammy)](https://hub.docker.com/_/ubuntu/tags?name=jammy)
 
-- **Size:** 1.29 GB
+- **Size:** 1.4 GB  
+- **X Server:** 21.1.4 (Custom)
 
 ---
 
@@ -107,11 +100,19 @@ Explore the supported Linux distributions with their versions, image sizes, and 
 
 #### [Rocky Linux 9](https://hub.docker.com/_/rockylinux/tags?name=9)
 
-- **Size:** 1.68 GB
+> [!WARNING]  
+> WebRTC is currently **not supported** on Rocky Linux due to upstream Kasm limitations. This may change in the future.
+
+- **Size:** 1.88 GB  
+- **X Server:** 1.20.14 (Custom)
 
 #### [Alma Linux 9](https://hub.docker.com/_/almalinux/tags?name=9)
 
-- **Size:** 1.46 GB
+> [!WARNING]  
+> WebRTC is currently **not supported** on Alma Linux due to upstream Kasm limitations. This may change in the future.
+
+- **Size:** 1.62 GB  
+- **X Server:** 1.20.14 (Custom)
 
 ## 🏷️ Versioning
 
@@ -124,7 +125,6 @@ Helios uses its own versioning scheme independent of the underlying distro versi
 | `v0.0.0-bookworm` | Debian 12 (Bookworm) |
 | `v0.0.0-noble`    | Ubuntu 24.04         |
 | `v0.0.0-jammy`    | Ubuntu 22.04         |
-| `v0.0.0-kali`     | Kali Linux           |
 | `v0.0.0-rocky-9`  | Rocky Linux          |
 | `v0.0.0-alma-9`   | Alma Linux           |
 
@@ -138,7 +138,6 @@ Helios uses its own versioning scheme independent of the underlying distro versi
   - `unstable-bookworm` (Debian 12)
   - `unstable-noble` (Ubuntu 24.04)
   - `unstable-jammy` (Ubuntu 22.04)
-  - `unstable-kali` (Kali Linux)
   - `unstable-rocky-9` (Rocky Linux)
   - `unstable-alma-9` (Alma Linux)
 
@@ -148,7 +147,6 @@ Helios uses its own versioning scheme independent of the underlying distro versi
   - `testing-noble` (Ubuntu 24.04)
   - `testing-bookworm` (Debian 12)
   - `testing-jammy` (Ubuntu 22.04)
-  - `testing-kali` (Kali Linux)
   - `testing-rocky-9` (Rocky Linux)
   - `testing-alma-9` (Alma Linux)
 
