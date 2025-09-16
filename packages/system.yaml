@@ -168,9 +168,9 @@ packages:
     debian: rpm2cpio cpio
 
   # Libraries for QT6 GUI applications, including platform plugins.
-  - ubuntu: libxcb-cursor0 libxcb1 qt6-qpa-plugins
-    rhel: libxcb libxcb-cursor qt6-qtbase-gui
-    debian: libxcb-cursor0 libxcb1 qt6-qpa-plugins
+  - ubuntu: qt6-qpa-plugins
+    rhel: libatomic xcb-util-wm xcb-util-cursor qt5-qtbase-gui
+    debian: libxcb-cursor0 qt6-qpa-plugins
 
   # ====================================
   # X11 and Display Server Packages
